@@ -1,95 +1,119 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+import Image from 'next/image'
+import NutritionSection from '@/components/sections/NutritionSection'
+import ExploreButton from '@/components/ui/ExploreButton'
+import BenefitsSection from '@/components/sections/BenefitsSection'
+import ExpertiseSection from '@/components/sections/ExpertiseSection'
 
 export default function Home() {
+  // Tags data
+  const tags = [
+    { label: "Health", width: "92px" },
+    { label: "Nature", width: "93px" },
+    { label: "Plant-based", width: "129px" },
+    { label: "Diet", width: "75px" }
+  ];
+
   return (
-    <div className={styles.page}>
-      <main className={styles.main}>
+    <main className="min-h-screen">
+      {/* Hero Section - Background Image Only */}
+      <section className="relative w-full h-[981px]">
         <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
+          src="/hero-background.png"
+          alt="Plant-based meals with fresh vegetables and fruits"
+          fill
+          className="object-cover"
           priority
         />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.tsx</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        
+        {/* Logo and Brand Name - Top Left */}
+        <div className="absolute top-6 left-6 z-10 flex items-center gap-3">
+          <Image
+            src="/logo.png"
+            alt="PlantBased Meals Logo"
+            width={60}
+            height={60}
+            className="object-contain"
+          />
+          <h1 className="text-[28px] font-semibold leading-[110%] tracking-normal">
+            <span className="text-[#29A248]">PLANTBASED</span>{' '}
+            <span className="text-[#EB7E29]">MEALS</span>
+          </h1>
         </div>
-      </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+
+        {/* Tags */}
+        <div className="absolute top-[270px] left-6 z-10 flex flex-wrap gap-2">
+          {tags.map((tag, index) => (
+            <div
+              key={index}
+              className="flex items-center gap-[10px] h-[31px] rounded-full border border-[#999999] py-2 px-4"
+              style={{ width: tag.width }}
+            >
+              {/* Green dot */}
+              <div className="w-2 h-2 bg-green-500 rounded-full flex-shrink-0"></div>
+              {/* Tag text */}
+              <span className="text-[#666666] text-[14px] font-normal leading-[110%] tracking-normal whitespace-nowrap">
+                {tag.label}
+              </span>
+            </div>
+          ))}
+        </div>
+        {/* Main Headline */}
+        <div className="absolute top-[330px] left-6 z-10 max-w-[760px]">
+          <h2 className="text-[69px] font-semibold leading-[100%] tracking-[-2%]">
+            <span className="text-[#141414]">Achieve </span>
+            <span className="text-[#079C14] italic">Permanent</span>
+            <br />
+            <span className="text-[#079C14] italic">healing</span>
+            <span className="text-[#141414]"> - without pills</span>
+          </h2>
+        </div>
+        {/* Description Text */}
+        <div className="absolute top-[490px] left-6 z-10 max-w-[758px]">
+          <p className="text-[20px] font-normal leading-[150%] tracking-normal text-[#474747]">
+            Are you frustrated with medications that only manage symptoms while the root 
+            cause remains unaddressed?<br />
+            Discover a proven, natural approach to healing your body from the inside out—
+            free from side effects and dependency on prescriptions.
+          </p>
+        </div>
+        {/* Trust Badge */}
+        <div className="absolute top-[630px] left-6 z-10 flex items-center gap-3">
           <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
+            src="/heroicon.png"
+            alt="Trust badge icon"
+            width={24}
+            height={24}
+            className="object-contain flex-shrink-0"
           />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+          <span className="text-[14px] font-normal leading-[140%] tracking-normal text-[#4D4D4D] whitespace-nowrap">
+            Tried and proven by over 2000 patients
+          </span>
+        </div>
+        {/* Buttons */}
+        <div className="absolute top-[680px] left-6 z-10 flex gap-4">
+          {/* First Button */}
+          <button className="flex items-center gap-4 w-[274px] h-[64px] bg-[#04640C] rounded-lg px-8 py-5">
+            <Image
+              src="/button1icon.png"
+              alt="Book consultation icon"
+              width={24}
+              height={24}
+              className="object-contain flex-shrink-0"
+            />
+            <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+              Book a consultation
+            </span>
+          </button>
+
+          {/* Second Button */}
+          <ExploreButton />
+        </div>
+      </section>
+
+      {/* Nutrition Section */}
+      <NutritionSection />
+      <BenefitsSection />
+      <ExpertiseSection />
+    </main>
+  )
 }
