@@ -20,7 +20,7 @@ export default function NutritionSection() {
               <div className="mt-6 max-w-[737px]">
                 <p className="text-[20px] font-normal leading-[150%] tracking-[1%] text-[#474747]">
                   Imagine a life free from obesity, diabetes, lupus, HIV/AIDS, sickle cell, and more—without dependence on medications. Science is confirming what nature has always known: <span className="font-semibold">whole-food, plant-based nutrition has the power to heal and restore your body</span>.<br />
-                  Thousands have reclaimed their health—now it's your turn.<br />
+                  Thousands have reclaimed their health—now it&apos;s your turn.<br />
                   Are you ready to take control of your well-being naturally?
                 </p>
               </div>

@@ -87,7 +87,7 @@ export default function BenefitsSection() {
 
             {/* Closing Text */}
             <p className="text-[20px] font-normal leading-[150%] tracking-[1%] text-[#474747] mt-6 max-w-[660px]">
-              This isn't about restrictive dieting or temporary fixes—it's about real, lasting healing through the power of plant-based nutrition and simple, effective lifestyle changes.
+              This isn&apos;t about restrictive dieting or temporary fixes—it&apos;s about real, lasting healing through the power of plant-based nutrition and simple, effective lifestyle changes.
             </p>
           </div>
         </div>
