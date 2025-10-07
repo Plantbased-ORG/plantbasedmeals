@@ -47,9 +47,60 @@ export default function Footer() {
 
           {/* Right Side - Programs */}
           <div className="mt-8">
-            <h3 className="text-[28px] font-semibold leading-[120%] tracking-[-1%] text-[#E5E7E5]">
+            <h3 className="text-[28px] font-semibold leading-[120%] tracking-[-1%] text-[#E5E7E5] mb-6">
               Programs
             </h3>
+
+            {/* Three Column Program List */}
+            <div className="grid grid-cols-3 gap-x-8">
+              {/* Column 1 */}
+              <ul className="space-y-3">
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Cancer
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  HIV/AIDS
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Obesity
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Weight gain
+                </li>
+              </ul>
+
+              {/* Column 2 */}
+              <ul className="space-y-3">
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Lupus
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Cancer
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Infertility
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Sickle Cell
+                </li>
+              </ul>
+
+              {/* Column 3 */}
+              <ul className="space-y-3">
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Type 2 Diabetes
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  High Cholesterol
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Heart Disease
+                </li>
+                <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
+                  Digestive Disorders
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
