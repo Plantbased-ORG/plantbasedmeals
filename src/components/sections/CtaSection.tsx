@@ -7,6 +7,11 @@ export default function CtaSection() {
           Take Control of Your Health—See<br />
           Results within <span className="font-bold italic text-[#079C14]">90 days!!</span>
         </h2>
+
+        {/* Description */}
+        <p className="text-[20px] font-normal leading-[150%] tracking-[1%] text-[#474747] text-center mt-6 max-w-[935px]">
+          Reverse chronic conditions, boost immunity, and restore balance with the power of plant-based nutrition. Backed by science and rooted in nature, this holistic approach helps you achieve lasting wellness within 90 days—naturally.
+        </p>
       </div>
     </section>
   )
