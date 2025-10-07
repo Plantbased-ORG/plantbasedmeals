@@ -29,6 +29,20 @@ export default function Footer() {
               chronic conditions—backed by both ancient<br />
               wisdom and modern science.
             </p>
+
+            {/* Button */}
+            <button className="flex items-center gap-4 w-[274px] h-[64px] bg-[#04640C] rounded-lg px-8 py-5 mt-8">
+              <Image
+                src="/button1icon.png"
+                alt="Book consultation icon"
+                width={24}
+                height={24}
+                className="object-contain flex-shrink-0"
+              />
+              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                Book a consultation
+              </span>
+            </button>
           </div>
 
           {/* Right Side - Programs */}
