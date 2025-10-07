@@ -4,6 +4,7 @@ import ExploreButton from '@/components/ui/ExploreButton'
 import BenefitsSection from '@/components/sections/BenefitsSection'
 import ExpertiseSection from '@/components/sections/ExpertiseSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
+import CtaSection from '@/components/sections/CtaSection'
 
 export default function Home() {
   // Tags data
@@ -116,6 +117,7 @@ export default function Home() {
       <BenefitsSection />
       <ExpertiseSection />
       <TestimonialsSection />
+      <CtaSection />
     </main>
   )
 }
