@@ -52,7 +52,7 @@ export default function Footer() {
             </h3>
 
             {/* Three Column Program List */}
-            <div className="grid grid-cols-3 gap-x-8">
+            <div className="grid grid-cols-3 gap-x-8 mb-12">
               {/* Column 1 */}
               <ul className="space-y-3">
                 <li className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#B1B4B2]">
@@ -100,6 +100,16 @@ export default function Footer() {
                   Digestive Disorders
                 </li>
               </ul>
+            </div>
+
+            {/* Newsletter Section */}
+            <div>
+              <h4 className="text-[28px] font-semibold leading-[120%] tracking-[-1%] text-[#E5E7E5] mb-4">
+                Subscribe to our Newsletter
+              </h4>
+              <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD]">
+                Gain access to expert insights on plant-based healing, natural remedies, practical wellness tips. Plus, get exclusive discounts, special offers, and early access to our latest products and resources!
+              </p>
             </div>
           </div>
         </div>
