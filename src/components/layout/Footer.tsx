@@ -46,8 +46,10 @@ export default function Footer() {
           </div>
 
           {/* Right Side - Programs */}
-          <div>
-            {/* Programs content will be added here */}
+          <div className="mt-8">
+            <h3 className="text-[28px] font-semibold leading-[120%] tracking-[-1%] text-[#E5E7E5]">
+              Programs
+            </h3>
           </div>
         </div>
       </div>
