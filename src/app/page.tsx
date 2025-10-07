@@ -18,8 +18,8 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Hero Section */}
-      <section className="relative w-[1512px] h-[981px] mx-auto">
+      {/* Hero Section - Background Image Only */}
+      <section className="relative w-full h-[981px]">
         <Image
           src="/hero-background.png"
           alt="Plant-based meals with fresh vegetables and fruits"
