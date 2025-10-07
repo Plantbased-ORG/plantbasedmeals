@@ -22,8 +22,12 @@ export default function Footer() {
             </div>
 
             {/* Description */}
-            <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD] mt-6">
-              True healing starts from within. We harness the power of whole foods and natural remedies to restore balance, boost immunity, and reverse chronic conditions—backed by both ancient wisdom and modern science.
+            <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD] mt-6 max-w-[450px]">
+              True healing starts from within. We harness the<br />
+              power of whole foods and natural remedies to<br />
+              restore balance, boost immunity, and reverse<br />
+              chronic conditions—backed by both ancient<br />
+              wisdom and modern science.
             </p>
           </div>
 
