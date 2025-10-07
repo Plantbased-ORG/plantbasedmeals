@@ -3,12 +3,16 @@
 import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
+const API_URL = 'https://plantbased-backend.onrender.com/api/v1';
+
 interface Testimonial {
-  id: string
+  id: number
   name: string
   location: string
   review: string
-  avatar?: string
+  avatar: string
+  created_at: string
+  updated_at: string
 }
 
 export default function TestimonialsSection() {
@@ -17,17 +21,23 @@ export default function TestimonialsSection() {
   const [error, setError] = useState<string | null>(null)
 
   useEffect(() => {
-    // Fetch testimonials from your backend API
     const fetchTestimonials = async () => {
       try {
-        const response = await fetch('/api/testimonials') // Replace with your actual API endpoint
+        const response = await fetch(`${API_URL}/testimonials`)
         
         if (!response.ok) {
           throw new Error('Failed to fetch testimonials')
         }
         
         const data = await response.json()
-        setTestimonials(data)
+        
+        // Handle null response (empty testimonials)
+        if (data === null || data.length === 0) {
+          setTestimonials([])
+        } else {
+          setTestimonials(data)
+        }
+        
         setLoading(false)
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred')
@@ -80,6 +90,25 @@ export default function TestimonialsSection() {
     )
   }
 
+  if (testimonials.length === 0) {
+    return (
+      <section className="relative w-full h-[920px]">
+        <Image
+          src="/testimonials-bg.png"
+          alt="Testimonials background with plant-based ingredients"
+          fill
+          className="object-cover"
+        />
+        <div className="relative z-10 max-w-[1512px] mx-auto px-6 py-16">
+          <h2 className="text-[57px] font-medium leading-[120%] tracking-[-1%] text-[#141414] text-center">
+            Our customers think highly of us
+          </h2>
+          <p className="text-center mt-8 text-[#474747]">No testimonials yet. Check back soon!</p>
+        </div>
+      </section>
+    )
+  }
+
   return (
     <section className="relative w-full h-[920px] overflow-hidden">
       {/* Background Image */}
@@ -112,15 +141,19 @@ export default function TestimonialsSection() {
 
                 {/* Reviewer Info */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0">
-                    {testimonial.avatar && (
+                  <div className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0 overflow-hidden">
+                    {testimonial.avatar ? (
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         width={40}
                         height={40}
-                        className="rounded-full object-cover"
+                        className="rounded-full object-cover w-full h-full"
                       />
+                    ) : (
+                      <div className="w-full h-full bg-purple-200 flex items-center justify-center text-purple-600 font-bold">
+                        {testimonial.name.charAt(0).toUpperCase()}
+                      </div>
                     )}
                   </div>
                   <div>
@@ -152,15 +185,19 @@ export default function TestimonialsSection() {
 
                 {/* Reviewer Info */}
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0">
-                    {testimonial.avatar && (
+                  <div className="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0 overflow-hidden">
+                    {testimonial.avatar ? (
                       <Image
                         src={testimonial.avatar}
                         alt={testimonial.name}
                         width={40}
                         height={40}
-                        className="rounded-full object-cover"
+                        className="rounded-full object-cover w-full h-full"
                       />
+                    ) : (
+                      <div className="w-full h-full bg-purple-200 flex items-center justify-center text-purple-600 font-bold">
+                        {testimonial.name.charAt(0).toUpperCase()}
+                      </div>
                     )}
                   </div>
                   <div>
