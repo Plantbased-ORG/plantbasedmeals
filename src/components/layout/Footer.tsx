@@ -6,7 +6,7 @@ export default function Footer() {
       <div className="max-w-[1512px] mx-auto px-6 py-16">
         <div className="grid grid-cols-2 gap-8">
           {/* Left Side - Logo and Brand */}
-          <div>
+          <div className="mt-8">
             <div className="flex items-center gap-3">
               <Image
                 src="/logo.png"
@@ -20,6 +20,11 @@ export default function Footer() {
                 <span className="text-[#EB7E29]">MEALS</span>
               </h1>
             </div>
+
+            {/* Description */}
+            <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD] mt-6">
+              True healing starts from within. We harness the power of whole foods and natural remedies to restore balance, boost immunity, and reverse chronic conditions—backed by both ancient wisdom and modern science.
+            </p>
           </div>
 
           {/* Right Side - Programs */}
