@@ -107,9 +107,21 @@ export default function Footer() {
               <h4 className="text-[28px] font-semibold leading-[120%] tracking-[-1%] text-[#E5E7E5] mb-4">
                 Subscribe to our Newsletter
               </h4>
-              <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD]">
+              <p className="text-[18px] font-normal leading-[150%] tracking-[-1%] text-[#CCD1CD] mb-6">
                 Gain access to expert insights on plant-based healing, natural remedies, practical wellness tips. Plus, get exclusive discounts, special offers, and early access to our latest products and resources!
               </p>
+
+              {/* Email Input and Subscribe Button */}
+              <div className="flex">
+                <input
+                  type="email"
+                  placeholder="Enter your mail address"
+                  className="w-[515px] h-[62px] bg-[#FAFAFA] rounded-l-lg py-5 px-6 text-[20px] font-normal leading-[150%] tracking-[1%] text-[#474747] placeholder:text-[#474747] focus:outline-none"
+                />
+                <button className="w-[151px] h-[62px] bg-[#333333] rounded-r-lg py-5 px-8 text-[18px] font-medium leading-[100%] tracking-normal text-[#77F981]">
+                  Subscribe
+                </button>
+              </div>
             </div>
           </div>
         </div>
