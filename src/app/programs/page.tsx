@@ -5,7 +5,7 @@ export default function ProgramsPage() {
   return (
     <main className="min-h-screen bg-white">
       {/* Logo and Brand Name - Top Left (shifted more to the right) */}
-      <div className="absolute top-6 left-20 z-10 flex items-center gap-3">
+      <div className="absolute top-6 left-34 z-10 flex items-center gap-3">
         <Image
           src="/logo.png"
           alt="PlantBased Meals Logo"
@@ -20,7 +20,7 @@ export default function ProgramsPage() {
       </div>
 
       {/* Breadcrumb Navigation (shifted down) */}
-      <div className="absolute top-32 left-20 z-10 flex items-center gap-4">
+      <div className="absolute top-32 left-23 z-10 flex items-center gap-6">
         {/* Back Arrow - Import as Image */}
         <Link href="/" className="flex items-center">
           <Image
@@ -49,6 +49,13 @@ export default function ProgramsPage() {
             Healing Programs
           </span>
         </div>
+      </div>
+
+      {/* Page Heading */}
+      <div className="absolute top-48 left-23 z-10">
+        <h2 className="text-[57px] font-medium leading-[110%] tracking-normal text-[#141414]">
+          Explore our Healing Programs
+        </h2>
       </div>
     </main>
   )
