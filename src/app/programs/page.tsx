@@ -52,11 +52,14 @@ export default function ProgramsPage() {
       </div>
 
       {/* Page Heading */}
-      <div className="absolute top-48 left-23 z-10">
+      <div className="absolute top-48 left-33 z-10">
         <h2 className="text-[57px] font-medium leading-[110%] tracking-normal text-[#141414]">
           Explore our Healing Programs
         </h2>
       </div>
+
+      {/* Horizontal Divider Line */}
+      <div className="absolute top-[292px] left-[120px] w-[1272px] h-0 border-t border-[#CCCCCC80]"></div>
     </main>
   )
 }
