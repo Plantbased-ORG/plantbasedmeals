@@ -60,6 +60,22 @@ export default function ProgramsPage() {
 
       {/* Horizontal Divider Line */}
       <div className="absolute top-[292px] left-[120px] w-[1272px] h-0 border-t border-[#CCCCCC80]"></div>
+
+      {/* Search Bar */}
+      <div className="absolute top-[316px] left-[120px] w-[620px] h-[56px] bg-[#F5F5F5] rounded-lg p-4 flex items-center gap-[10px]">
+        <Image
+          src="/search-icon.png"
+          alt="Search"
+          width={24}
+          height={24}
+          className="object-contain"
+        />
+        <input
+          type="text"
+          placeholder="Search for a program"
+          className="flex-1 bg-transparent text-[20px] font-medium leading-[110%] tracking-normal text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none"
+        />
+      </div>
     </main>
   )
 }
