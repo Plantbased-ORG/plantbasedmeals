@@ -4,8 +4,8 @@ import Link from 'next/link'
 export default function ProgramsPage() {
   return (
     <main className="min-h-screen bg-white">
-      {/* Logo and Brand Name - Top Left (shifted right) */}
-      <div className="absolute top-6 left-12 z-10 flex items-center gap-3">
+      {/* Logo and Brand Name - Top Left (shifted more to the right) */}
+      <div className="absolute top-6 left-20 z-10 flex items-center gap-3">
         <Image
           src="/logo.png"
           alt="PlantBased Meals Logo"
@@ -19,26 +19,17 @@ export default function ProgramsPage() {
         </h1>
       </div>
 
-      {/* Breadcrumb Navigation */}
-      <div className="absolute top-24 left-12 z-10 flex items-center gap-2">
-        {/* Back Arrow */}
+      {/* Breadcrumb Navigation (shifted down) */}
+      <div className="absolute top-32 left-20 z-10 flex items-center gap-2">
+        {/* Back Arrow - Import as Image */}
         <Link href="/" className="flex items-center">
-          <svg 
-            width="20" 
-            height="20" 
-            viewBox="0 0 20 20" 
-            fill="none" 
-            xmlns="http://www.w3.org/2000/svg"
-            className="text-black"
-          >
-            <path 
-              d="M12.5 15L7.5 10L12.5 5" 
-              stroke="currentColor" 
-              strokeWidth="2" 
-              strokeLinecap="round" 
-              strokeLinejoin="round"
-            />
-          </svg>
+          <Image
+            src="/back-arrow.png"
+            alt="Back to home"
+            width={20}
+            height={20}
+            className="object-contain"
+          />
         </Link>
 
         {/* Home */}
