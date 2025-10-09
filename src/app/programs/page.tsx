@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Footer from '@/components/layout/Footer'
 
 // TypeScript interface for Program data structure
 interface Program {
@@ -187,6 +188,11 @@ export default function ProgramsPage() {
             </div>
           ))}
         </div>
+      </div>
+
+      {/* Footer - Positioned below the program grid */}
+      <div className="absolute top-[1700px] w-full">
+        <Footer />
       </div>
     </main>
   )
