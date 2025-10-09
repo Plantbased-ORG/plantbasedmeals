@@ -1,13 +1,36 @@
-'use client'
-
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import Footer from '@/components/layout/Footer'
 
-// TypeScript interface for Program data structure
+// Match the backend response structure
+interface ProgramFromAPI {
+  program: {
+    id: number
+    name: string
+    short_description: string
+    main_image_url: string
+    main_image_public_id: string
+    intro_description: string
+    what_causes: string
+    health_risks: string
+    strategies: string
+    conclusion: string
+    created_at: string
+    updated_at: string
+  }
+  pricing_plans: Array<{
+    id: number
+    program_id: number
+    name: string
+    subtitle: string
+    price: string
+    features: string[]
+  }>
+}
+
+// Transformed data for display
 interface Program {
-  id: string
+  id: number
   title: string
   description: string
   image: string
@@ -19,7 +42,6 @@ export default function ProgramsPage() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch programs from API
   useEffect(() => {
     async function fetchPrograms() {
       try {
@@ -29,33 +51,29 @@ export default function ProgramsPage() {
           headers: {
             'Content-Type': 'application/json',
           },
-          // Add this for CORS
           mode: 'cors',
         })
         
         if (!response.ok) {
-          throw new Error(`Failed to fetch programs: ${response.status} ${response.statusText}`)
+          throw new Error(`Failed to fetch programs: ${response.status}`)
         }
         
-        const data = await response.json()
+        const data: ProgramFromAPI[] = await response.json()
         
-        // Validate and set programs - handle null, undefined, or non-array responses
-        if (Array.isArray(data)) {
-          setPrograms(data)
-        } else if (data && Array.isArray(data.programs)) {
-          setPrograms(data.programs)
-        } else if (data && Array.isArray(data.data)) {
-          setPrograms(data.data)
-        } else {
-          setPrograms([])
-        }
+        // Transform the backend data to match our display structure
+        const transformedPrograms: Program[] = data.map((item) => ({
+          id: item.program.id,
+          title: item.program.name,
+          description: item.program.short_description,
+          image: item.program.main_image_url,
+          slug: item.program.name.toLowerCase().replace(/\s+/g, '-'), // Create slug from name
+        }))
+        
+        setPrograms(transformedPrograms)
       } catch (err) {
         console.error('Error fetching programs:', err)
-        // Don't show error, just set empty programs array
-        // This way it will show "No programs available yet"
+        setError(err instanceof Error ? err.message : 'Failed to load programs')
         setPrograms([])
-        // Optionally log the error for debugging
-        // setError(err instanceof Error ? err.message : 'An error occurred while fetching programs')
       } finally {
         setLoading(false)
       }
@@ -66,7 +84,7 @@ export default function ProgramsPage() {
 
   return (
     <main className="min-h-screen bg-white">
-      {/* Logo and Brand Name - Top Left (shifted more to the right) */}
+      {/* Logo and Brand Name */}
       <div className="absolute top-6 left-34 z-10 flex items-center gap-3">
         <Image
           src="/logo.png"
@@ -81,9 +99,8 @@ export default function ProgramsPage() {
         </h1>
       </div>
 
-      {/* Breadcrumb Navigation (shifted down) */}
+      {/* Breadcrumb Navigation */}
       <div className="absolute top-32 left-23 z-10 flex items-center gap-6">
-        {/* Back Arrow - Import as Image */}
         <Link href="/" className="flex items-center">
           <Image
             src="/back-arrow.png"
@@ -94,19 +111,13 @@ export default function ProgramsPage() {
           />
         </Link>
 
-        {/* Home and Navigation */}
         <div className="flex items-center gap-2">
-          {/* Home */}
           <Link href="/">
             <span className="text-[18px] font-normal leading-[100%] tracking-normal text-[#474747]">
               Home
             </span>
           </Link>
-
-          {/* Separator */}
           <span className="text-[18px] text-[#474747]">/</span>
-
-          {/* Current Page */}
           <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#2E2E2E]">
             Healing Programs
           </span>
@@ -120,7 +131,7 @@ export default function ProgramsPage() {
         </h2>
       </div>
 
-      {/* Horizontal Divider Line */}
+      {/* Horizontal Divider */}
       <div className="absolute top-[292px] left-[120px] w-[1272px] h-0 border-t border-[#CCCCCC80]"></div>
 
       {/* Search Bar */}
@@ -139,60 +150,67 @@ export default function ProgramsPage() {
         />
       </div>
 
-      {/* Programs Grid Container */}
-      <div className="absolute top-[404px] left-[120px] w-[1272px] h-[1222px] overflow-y-auto">
-        <div className="grid grid-cols-4 gap-8">
-          {loading && (
-            <div className="col-span-4 text-center text-[#474747] py-8">
-              Loading programs...
-            </div>
-          )}
+      {/* Programs Grid */}
+      <div className="absolute top-[404px] left-[120px] w-[1272px] min-h-[800px]">
+        {loading && (
+          <div className="text-center text-[#474747] py-8">
+            Loading programs...
+          </div>
+        )}
 
-          {!loading && programs.length === 0 && (
-            <div className="col-span-4 text-center text-[#474747] py-8">
-              No programs available yet.
-            </div>
-          )}
+        {error && (
+          <div className="text-center text-red-600 py-8">
+            {error}
+          </div>
+        )}
 
-          {!loading && programs.length > 0 && programs.map((program) => (
-            <div
-              key={program.id}
-              className="w-[294px] min-w-[294px] h-[386px] flex flex-col gap-4"
-            >
-              {/* Program Image */}
-              <div className="w-[294px] h-[240px] relative overflow-hidden rounded-lg">
-                <Image
-                  src={program.image || '/placeholder-program.png'}
-                  alt={program.title}
-                  fill
-                  className="object-cover"
-                />
+        {!loading && !error && programs.length === 0 && (
+          <div className="text-center text-[#474747] py-8">
+            No programs available yet.
+          </div>
+        )}
+
+        {!loading && !error && programs.length > 0 && (
+          <div className="grid grid-cols-4 gap-8">
+            {programs.map((program) => (
+              <div
+                key={program.id}
+                className="w-[294px] min-w-[294px] h-[386px] flex flex-col gap-4"
+              >
+                {/* Program Image */}
+                <div className="w-[294px] h-[240px] relative overflow-hidden rounded-lg bg-gray-100">
+                  <Image
+                    src={program.image || '/placeholder-program.png'}
+                    alt={program.title}
+                    fill
+                    className="object-cover"
+                    onError={(e) => {
+                      const target = e.target as HTMLImageElement
+                      target.src = '/placeholder-program.png'
+                    }}
+                  />
+                </div>
+
+                {/* Program Title */}
+                <h3 className="text-[20px] font-medium leading-[110%] tracking-normal text-[#2E2E2E]">
+                  {program.title}
+                </h3>
+
+                {/* Program Description */}
+                <p className="text-[16px] font-normal leading-[150%] tracking-normal text-[#474747] line-clamp-2">
+                  {program.description}
+                </p>
+
+                {/* Read Full Program Link */}
+                <Link href={`/programs/${program.slug}`}>
+                  <span className="text-[18px] font-medium leading-[110%] tracking-normal text-[#04640C] hover:underline cursor-pointer">
+                    READ FULL PROGRAM
+                  </span>
+                </Link>
               </div>
-
-              {/* Program Title */}
-              <h3 className="text-[20px] font-medium leading-[110%] tracking-normal text-[#2E2E2E]">
-                {program.title}
-              </h3>
-
-              {/* Program Description */}
-              <p className="text-[16px] font-normal leading-[150%] tracking-normal text-[#474747] line-clamp-2">
-                {program.description}
-              </p>
-
-              {/* Read Full Program Link */}
-              <Link href={`/programs/${program.slug}`}>
-                <span className="text-[18px] font-medium leading-[110%] tracking-normal text-[#04640C] hover:underline">
-                  READ FULL PROGRAM
-                </span>
-              </Link>
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Footer - Positioned below the program grid */}
-      <div className="absolute top-[1700px] w-full">
-        <Footer />
+            ))}
+          </div>
+        )}
       </div>
     </main>
   )
