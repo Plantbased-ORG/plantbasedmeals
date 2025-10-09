@@ -1,7 +1,44 @@
+'use client'
+
 import Image from 'next/image'
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
+
+// TypeScript interface for Program data structure
+interface Program {
+  id: string
+  title: string
+  description: string
+  image: string
+  slug: string
+}
 
 export default function ProgramsPage() {
+  const [programs, setPrograms] = useState<Program[]>([])
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
+
+  // Fetch programs from API
+  useEffect(() => {
+    async function fetchPrograms() {
+      try {
+        const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://plantbased-backend.onrender.com'
+        const response = await fetch(`${apiUrl}/api/v1/programs`)
+        
+        if (!response.ok) throw new Error('Failed to fetch programs')
+        
+        const data = await response.json()
+        setPrograms(data)
+      } catch (err) {
+        setError(err instanceof Error ? err.message : 'An error occurred')
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPrograms()
+  }, [])
+
   return (
     <main className="min-h-screen bg-white">
       {/* Logo and Brand Name - Top Left (shifted more to the right) */}
@@ -80,7 +117,57 @@ export default function ProgramsPage() {
       {/* Programs Grid Container */}
       <div className="absolute top-[404px] left-[120px] w-[1272px] h-[1222px] overflow-y-auto">
         <div className="grid grid-cols-4 gap-8">
-          {/* Program cards will be added here */}
+          {loading && (
+            <div className="col-span-4 text-center text-[#474747] py-8">
+              Loading programs...
+            </div>
+          )}
+
+          {error && (
+            <div className="col-span-4 text-center text-red-600 py-8">
+              Error: {error}
+            </div>
+          )}
+
+          {!loading && !error && programs.length === 0 && (
+            <div className="col-span-4 text-center text-[#474747] py-8">
+              No programs available yet.
+            </div>
+          )}
+
+          {!loading && !error && programs.map((program) => (
+            <div
+              key={program.id}
+              className="w-[294px] min-w-[294px] h-[386px] flex flex-col gap-4"
+            >
+              {/* Program Image */}
+              <div className="w-[294px] h-[240px] relative overflow-hidden rounded-lg">
+                <Image
+                  src={program.image}
+                  alt={program.title}
+                  fill
+                  className="object-cover"
+                />
+              </div>
+
+              {/* Program Title */}
+              <h3 className="text-[20px] font-medium leading-[110%] tracking-normal text-[#2E2E2E]">
+                {program.title}
+              </h3>
+
+              {/* Program Description */}
+              <p className="text-[16px] font-normal leading-[150%] tracking-normal text-[#474747] line-clamp-2">
+                {program.description}
+              </p>
+
+              {/* Read Full Program Link */}
+              <Link href={`/programs/${program.slug}`}>
+                <span className="text-[18px] font-medium leading-[110%] tracking-normal text-[#04640C] hover:underline">
+                  READ FULL PROGRAM
+                </span>
+              </Link>
+            </div>
+          ))}
         </div>
       </div>
     </main>
