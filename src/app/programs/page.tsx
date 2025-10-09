@@ -25,12 +25,29 @@ export default function ProgramsPage() {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://plantbased-backend.onrender.com'
         const response = await fetch(`${apiUrl}/api/v1/programs`)
         
-        if (!response.ok) throw new Error('Failed to fetch programs')
+        if (!response.ok) {
+          throw new Error(`Failed to fetch programs: ${response.status} ${response.statusText}`)
+        }
         
         const data = await response.json()
-        setPrograms(data)
+        
+        // Validate and set programs - handle null, undefined, or non-array responses
+        if (Array.isArray(data)) {
+          setPrograms(data)
+        } else if (data && Array.isArray(data.programs)) {
+          // In case the API returns {programs: [...]}
+          setPrograms(data.programs)
+        } else if (data && Array.isArray(data.data)) {
+          // In case the API returns {data: [...]}
+          setPrograms(data.data)
+        } else {
+          // If data is null or not an array, set empty array
+          setPrograms([])
+        }
       } catch (err) {
-        setError(err instanceof Error ? err.message : 'An error occurred')
+        console.error('Error fetching programs:', err)
+        setError(err instanceof Error ? err.message : 'An error occurred while fetching programs')
+        setPrograms([]) // Ensure programs is always an array even on error
       } finally {
         setLoading(false)
       }
@@ -135,7 +152,7 @@ export default function ProgramsPage() {
             </div>
           )}
 
-          {!loading && !error && programs.map((program) => (
+          {!loading && !error && programs.length > 0 && programs.map((program) => (
             <div
               key={program.id}
               className="w-[294px] min-w-[294px] h-[386px] flex flex-col gap-4"
@@ -143,7 +160,7 @@ export default function ProgramsPage() {
               {/* Program Image */}
               <div className="w-[294px] h-[240px] relative overflow-hidden rounded-lg">
                 <Image
-                  src={program.image}
+                  src={program.image || '/placeholder-program.png'}
                   alt={program.title}
                   fill
                   className="object-cover"
