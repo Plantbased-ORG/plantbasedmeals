@@ -51,10 +51,10 @@ export default function ProgramDetailPage() {
           throw new Error(`Failed to fetch programs: ${response.status}`)
         }
         
-        const data = await response.json()
+        const data: ProgramFromAPI[] = await response.json()
         
         // Find the program that matches the slug
-        const matchedProgram = data.find((item: any) => {
+        const matchedProgram = data.find((item: ProgramFromAPI) => {
           const programSlug = item.program.name.toLowerCase().replace(/\s+/g, '-')
           return programSlug === slug
         })
