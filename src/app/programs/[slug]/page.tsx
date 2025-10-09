@@ -5,6 +5,16 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
+// TypeScript interface for backend API response
+interface ProgramFromAPI {
+  program: {
+    id: number
+    name: string
+    short_description: string
+    main_image_url: string
+  }
+}
+
 // TypeScript interface for Program data structure
 interface Program {
   id: number
