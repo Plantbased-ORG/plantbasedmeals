@@ -7,7 +7,7 @@ import { useParams } from 'next/navigation'
 
 // TypeScript interface for Program data structure
 interface Program {
-  id: string
+  id: number
   title: string
   description: string
   image: string
@@ -27,7 +27,9 @@ export default function ProgramDetailPage() {
     async function fetchProgram() {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://plantbased-backend.onrender.com'
-        const response = await fetch(`${apiUrl}/api/v1/programs/${slug}`, {
+        
+        // First, get all programs to find the matching slug
+        const response = await fetch(`${apiUrl}/api/v1/programs`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -36,11 +38,30 @@ export default function ProgramDetailPage() {
         })
         
         if (!response.ok) {
-          throw new Error(`Failed to fetch program: ${response.status} ${response.statusText}`)
+          throw new Error(`Failed to fetch programs: ${response.status}`)
         }
         
         const data = await response.json()
-        setProgram(data)
+        
+        // Find the program that matches the slug
+        const matchedProgram = data.find((item: any) => {
+          const programSlug = item.program.name.toLowerCase().replace(/\s+/g, '-')
+          return programSlug === slug
+        })
+        
+        if (!matchedProgram) {
+          throw new Error('Program not found')
+        }
+        
+        // Transform to match your interface
+        setProgram({
+          id: matchedProgram.program.id,
+          title: matchedProgram.program.name,
+          description: matchedProgram.program.short_description,
+          image: matchedProgram.program.main_image_url,
+          slug: slug
+        })
+        
       } catch (err) {
         console.error('Error fetching program:', err)
         setError(err instanceof Error ? err.message : 'An error occurred while fetching program')
