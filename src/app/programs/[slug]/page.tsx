@@ -207,97 +207,99 @@ export default function ProgramDetailPage() {
 
       {/* Program Content Sections */}
       {!loading && !error && program && (
-        <div className="absolute top-[332px] left-[120px] w-[1032px]">
-          {/* Introduction */}
-          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
-            {program.intro_description}
-          </p>
+        <>
+          <div className="absolute top-[332px] left-[120px] w-[1032px]">
+            {/* Introduction */}
+            <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+              {program.intro_description}
+            </p>
 
-          {/* Main Content Image */}
-          <div className="relative w-[1032px] h-[602px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={program.main_content_image_url}
-              alt="Introduction"
-              fill
-              className="object-cover"
-            />
+            {/* Main Content Image */}
+            <div className="relative w-[1032px] h-[602px] mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={program.main_content_image_url}
+                alt="Introduction"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* What Causes Section */}
+            <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+              What Causes {program.title}?
+            </h3>
+            <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+              {program.what_causes}
+            </p>
+
+            {/* What Causes Image */}
+            <div className="relative w-[1032px] h-[689px] mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={program.what_causes_image_url}
+                alt="What Causes"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Health Risks Section */}
+            <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+              Health Risks Associated with {program.title}
+            </h3>
+            <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+              {program.health_risks}
+            </p>
+
+            {/* Health Risks Image */}
+            <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={program.health_risks_image_url}
+                alt="Health Risks"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Strategies Section */}
+            <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+              Strategies for Managing and Preventing {program.title}
+            </h3>
+            <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+              {program.strategies}
+            </p>
+
+            {/* Strategies Image */}
+            <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
+              <Image
+                src={program.strategies_image_url}
+                alt="Strategies"
+                fill
+                className="object-cover"
+              />
+            </div>
+
+            {/* Conclusion Section */}
+            <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+              Conclusion
+            </h3>
+            <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-12 whitespace-pre-line">
+              {program.conclusion}
+            </p>
+
+            {/* Get This Program Now Button */}
+            <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-12">
+              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                Get this program now
+              </span>
+            </button>
           </div>
 
-          {/* What Causes Section */}
-          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
-            What Causes {program.title}?
-          </h3>
-          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
-            {program.what_causes}
-          </p>
-
-          {/* What Causes Image */}
-          <div className="relative w-[1032px] h-[689px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={program.what_causes_image_url}
-              alt="What Causes"
-              fill
-              className="object-cover"
-            />
+          {/* Footer - positioned right after content with proper spacing */}
+          <div className="absolute top-[4100px] w-full">
+            <Footer />
           </div>
-
-          {/* Health Risks Section */}
-          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
-            Health Risks Associated with {program.title}
-          </h3>
-          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
-            {program.health_risks}
-          </p>
-
-          {/* Health Risks Image */}
-          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={program.health_risks_image_url}
-              alt="Health Risks"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Strategies Section */}
-          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
-            Strategies for Managing and Preventing {program.title}
-          </h3>
-          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
-            {program.strategies}
-          </p>
-
-          {/* Strategies Image */}
-          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={program.strategies_image_url}
-              alt="Strategies"
-              fill
-              className="object-cover"
-            />
-          </div>
-
-          {/* Conclusion Section */}
-          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
-            Conclusion
-          </h3>
-          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-12 whitespace-pre-line">
-            {program.conclusion}
-          </p>
-
-          {/* Get This Program Now Button */}
-          <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-32">
-            <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-              Get this program now
-            </span>
-          </button>
-        </div>
+        </>
       )}
-
-      {/* Footer */}
-      <div className="relative mt-20 w-full">
-        <Footer />
-      </div>
     </main>
   )
 }
