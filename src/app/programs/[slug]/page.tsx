@@ -12,6 +12,16 @@ interface ProgramFromAPI {
     name: string
     short_description: string
     main_image_url: string
+    intro_description: string
+    main_content_image_url: string
+    what_causes: string
+    what_causes_image_url: string
+    health_risks: string
+    health_risks_image_url: string
+    strategies: string
+    strategies_image_url: string
+    conclusion: string
+    conclusion_image_url: string
   }
 }
 
@@ -22,6 +32,16 @@ interface Program {
   description: string
   image: string
   slug: string
+  intro_description: string
+  main_content_image_url: string
+  what_causes: string
+  what_causes_image_url: string
+  health_risks: string
+  health_risks_image_url: string
+  strategies: string
+  strategies_image_url: string
+  conclusion: string
+  conclusion_image_url: string
 }
 
 export default function ProgramDetailPage() {
@@ -69,7 +89,17 @@ export default function ProgramDetailPage() {
           title: matchedProgram.program.name,
           description: matchedProgram.program.short_description,
           image: matchedProgram.program.main_image_url,
-          slug: slug
+          slug: slug,
+          intro_description: matchedProgram.program.intro_description,
+          main_content_image_url: matchedProgram.program.main_content_image_url,
+          what_causes: matchedProgram.program.what_causes,
+          what_causes_image_url: matchedProgram.program.what_causes_image_url,
+          health_risks: matchedProgram.program.health_risks,
+          health_risks_image_url: matchedProgram.program.health_risks_image_url,
+          strategies: matchedProgram.program.strategies,
+          strategies_image_url: matchedProgram.program.strategies_image_url,
+          conclusion: matchedProgram.program.conclusion,
+          conclusion_image_url: matchedProgram.program.conclusion_image_url,
         })
         
       } catch (err) {
@@ -170,6 +200,101 @@ export default function ProgramDetailPage() {
           </div>
         )}
       </div>
+
+      {/* Horizontal Divider */}
+      <div className="absolute top-[292px] left-[120px] w-[1272px] h-0 border-t border-[#CCCCCC80]"></div>
+
+      {/* Program Content Sections */}
+      {!loading && !error && program && (
+        <div className="absolute top-[332px] left-[120px] w-[1032px]">
+          {/* Introduction */}
+          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+            {program.intro_description}
+          </p>
+
+          {/* Main Content Image */}
+          <div className="relative w-[1032px] h-[602px] mb-12 rounded-lg overflow-hidden">
+            <Image
+              src={program.main_content_image_url}
+              alt="Introduction"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* What Causes Section */}
+          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+            What Causes {program.title}?
+          </h3>
+          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+            {program.what_causes}
+          </p>
+
+          {/* What Causes Image */}
+          <div className="relative w-[1032px] h-[689px] mb-12 rounded-lg overflow-hidden">
+            <Image
+              src={program.what_causes_image_url}
+              alt="What Causes"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Health Risks Section */}
+          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+            Health Risks Associated with {program.title}
+          </h3>
+          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+            {program.health_risks}
+          </p>
+
+          {/* Health Risks Image */}
+          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
+            <Image
+              src={program.health_risks_image_url}
+              alt="Health Risks"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Strategies Section */}
+          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+            Strategies for Managing and Preventing {program.title}
+          </h3>
+          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-8 whitespace-pre-line">
+            {program.strategies}
+          </p>
+
+          {/* Strategies Image */}
+          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
+            <Image
+              src={program.strategies_image_url}
+              alt="Strategies"
+              fill
+              className="object-cover"
+            />
+          </div>
+
+          {/* Conclusion Section */}
+          <h3 className="text-[40px] font-semibold leading-[120%] tracking-[0.02em] text-[#141414] mb-6">
+            Conclusion
+          </h3>
+          <p className="text-[24px] font-normal leading-[160%] tracking-[0.02em] text-[#474747] mb-12 whitespace-pre-line">
+            {program.conclusion}
+          </p>
+
+          {/* Conclusion Image */}
+          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
+            <Image
+              src={program.conclusion_image_url}
+              alt="Conclusion"
+              fill
+              className="object-cover"
+            />
+          </div>
+        </div>
+      )}
     </main>
   )
 }
