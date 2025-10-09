@@ -155,11 +155,18 @@ export default function ProgramDetailPage() {
         )}
         
         {!loading && !error && program && (
-          <div>
+          <div className="relative">
             {/* Program details content will be added here */}
             <h2 className="text-[57px] font-medium leading-[110%] tracking-normal text-[#141414]">
               {program.title}
             </h2>
+            
+            {/* Get Program Button */}
+            <button className="absolute top-0 left-[966px] w-[173px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4">
+              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                Get Program
+              </span>
+            </button>
           </div>
         )}
       </div>
