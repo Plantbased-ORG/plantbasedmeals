@@ -286,7 +286,7 @@ export default function ProgramDetailPage() {
           </p>
 
           {/* Get This Program Now Button */}
-          <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-20">
+          <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-32">
             <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
               Get this program now
             </span>
@@ -295,7 +295,7 @@ export default function ProgramDetailPage() {
       )}
 
       {/* Footer */}
-      <div className="absolute top-[5400px] w-full">
+      <div className="relative mt-20 w-full">
         <Footer />
       </div>
     </main>
