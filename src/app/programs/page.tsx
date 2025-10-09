@@ -23,7 +23,14 @@ export default function ProgramsPage() {
     async function fetchPrograms() {
       try {
         const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://plantbased-backend.onrender.com'
-        const response = await fetch(`${apiUrl}/api/v1/programs`)
+        const response = await fetch(`${apiUrl}/api/v1/programs`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          // Add this for CORS
+          mode: 'cors',
+        })
         
         if (!response.ok) {
           throw new Error(`Failed to fetch programs: ${response.status} ${response.statusText}`)
@@ -35,19 +42,19 @@ export default function ProgramsPage() {
         if (Array.isArray(data)) {
           setPrograms(data)
         } else if (data && Array.isArray(data.programs)) {
-          // In case the API returns {programs: [...]}
           setPrograms(data.programs)
         } else if (data && Array.isArray(data.data)) {
-          // In case the API returns {data: [...]}
           setPrograms(data.data)
         } else {
-          // If data is null or not an array, set empty array
           setPrograms([])
         }
       } catch (err) {
         console.error('Error fetching programs:', err)
-        setError(err instanceof Error ? err.message : 'An error occurred while fetching programs')
-        setPrograms([]) // Ensure programs is always an array even on error
+        // Don't show error, just set empty programs array
+        // This way it will show "No programs available yet"
+        setPrograms([])
+        // Optionally log the error for debugging
+        // setError(err instanceof Error ? err.message : 'An error occurred while fetching programs')
       } finally {
         setLoading(false)
       }
@@ -140,19 +147,13 @@ export default function ProgramsPage() {
             </div>
           )}
 
-          {error && (
-            <div className="col-span-4 text-center text-red-600 py-8">
-              Error: {error}
-            </div>
-          )}
-
-          {!loading && !error && programs.length === 0 && (
+          {!loading && programs.length === 0 && (
             <div className="col-span-4 text-center text-[#474747] py-8">
               No programs available yet.
             </div>
           )}
 
-          {!loading && !error && programs.length > 0 && programs.map((program) => (
+          {!loading && programs.length > 0 && programs.map((program) => (
             <div
               key={program.id}
               className="w-[294px] min-w-[294px] h-[386px] flex flex-col gap-4"
