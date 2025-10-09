@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Footer from '@/components/layout/Footer'
 
 // Match the backend response structure
 interface ProgramFromAPI {
@@ -186,6 +187,7 @@ export default function ProgramsPage() {
                     alt={program.title}
                     fill
                     className="object-cover"
+                    unoptimized
                     onError={(e) => {
                       const target = e.target as HTMLImageElement
                       target.src = '/placeholder-program.png'
@@ -213,6 +215,11 @@ export default function ProgramsPage() {
             ))}
           </div>
         )}
+      </div>
+
+      {/* Footer */}
+      <div className="absolute top-[1700px] w-full">
+        <Footer />
       </div>
     </main>
   )
