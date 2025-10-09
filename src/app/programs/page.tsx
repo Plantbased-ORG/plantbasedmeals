@@ -76,6 +76,13 @@ export default function ProgramsPage() {
           className="flex-1 bg-transparent text-[20px] font-medium leading-[110%] tracking-normal text-[#7A7A7A] placeholder:text-[#7A7A7A] focus:outline-none"
         />
       </div>
+
+      {/* Programs Grid Container */}
+      <div className="absolute top-[404px] left-[120px] w-[1272px] h-[1222px] overflow-y-auto">
+        <div className="grid grid-cols-4 gap-8">
+          {/* Program cards will be added here */}
+        </div>
+      </div>
     </main>
   )
 }
