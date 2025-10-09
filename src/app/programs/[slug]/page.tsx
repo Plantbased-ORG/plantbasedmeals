@@ -4,6 +4,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
+import Footer from '@/components/layout/Footer'
 
 // TypeScript interface for backend API response
 interface ProgramFromAPI {
@@ -284,17 +285,19 @@ export default function ProgramDetailPage() {
             {program.conclusion}
           </p>
 
-          {/* Conclusion Image */}
-          <div className="relative w-[1032px] h-[766px] mb-12 rounded-lg overflow-hidden">
-            <Image
-              src={program.conclusion_image_url}
-              alt="Conclusion"
-              fill
-              className="object-cover"
-            />
-          </div>
+          {/* Get This Program Now Button */}
+          <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-20">
+            <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+              Get this program now
+            </span>
+          </button>
         </div>
       )}
+
+      {/* Footer */}
+      <div className="absolute top-[5400px] w-full">
+        <Footer />
+      </div>
     </main>
   )
 }
