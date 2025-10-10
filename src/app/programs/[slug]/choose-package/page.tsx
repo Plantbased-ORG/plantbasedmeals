@@ -151,17 +151,22 @@ export default function ChoosePackagePage() {
         </div>
       )}
 
-      {/* Page content will go here */}
-      <div className="absolute top-48 left-33 z-10">
-        {!loading && !error && (
-          <div>
-            <h2 className="text-[24px] font-medium text-[#141414]">
-              Choose your package for {programName}
-            </h2>
-            {/* Package selection UI will be added here based on your design */}
-          </div>
-        )}
-      </div>
+      {/* Choose a Package Section - Centered */}
+      {!loading && !error && (
+        <div className="w-full mt-[250px]">
+          {/* Main Heading */}
+          <h2 className="text-[57px] font-medium leading-[110%] tracking-normal text-center text-[#141414] mb-4">
+            Choose a Package
+          </h2>
+          
+          {/* Subtitle/Description */}
+          <p className="text-[18px] font-normal leading-[150%] tracking-normal text-center text-[#474747] max-w-[800px] mx-auto">
+            Our expertly designed programs are tailored to optimize your body for lasting vitality, energy, and well-being—not just temporary results. Choose a plan that aligns with your goals and budget.
+          </p>
+          
+          {/* Package cards will be added here */}
+        </div>
+      )}
     </main>
   )
 }
