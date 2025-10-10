@@ -160,11 +160,24 @@ export default function ChoosePackagePage() {
           </h2>
           
           {/* Subtitle/Description */}
-          <p className="text-[18px] font-normal leading-[150%] tracking-normal text-center text-[#474747] max-w-[800px] mx-auto">
+          <p className="text-[18px] font-normal leading-[150%] tracking-normal text-center text-[#474747] max-w-[800px] mx-auto mb-12">
             Our expertly designed programs are tailored to optimize your body for lasting vitality, energy, and well-being—not just temporary results. Choose a plan that aligns with your goals and budget.
           </p>
           
+          {/* Green Plant Background - positioned below headers */}
+          <div className="absolute top-[430px] left-0 w-full h-[600px] pointer-events-none z-0">
+            <Image
+              src="/package-plants-bg.png"
+              alt="Decorative plants background"
+              fill
+              className="object-cover opacity-40"
+            />
+          </div>
+          
           {/* Package cards will be added here */}
+          <div className="relative z-10">
+            {/* Cards will go here */}
+          </div>
         </div>
       )}
     </main>
