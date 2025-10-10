@@ -27,10 +27,17 @@ export default function ChoosePackagePage() {
   const slug = params.slug as string
   
   const [programName, setProgramName] = useState<string>('')
+  const [pricingPlans, setPricingPlans] = useState<Array<{
+    id: number
+    name: string
+    subtitle: string
+    price: number
+    features: string[]
+  }>>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
 
-  // Fetch program to get the name for breadcrumb
+  // Fetch program to get the name for breadcrumb and pricing plans
   useEffect(() => {
     async function fetchProgram() {
       try {
@@ -61,6 +68,7 @@ export default function ChoosePackagePage() {
         }
         
         setProgramName(matchedProgram.program.name)
+        setPricingPlans(matchedProgram.pricing_plans)
         
       } catch (err) {
         console.error('Error fetching program:', err)
@@ -176,311 +184,101 @@ export default function ChoosePackagePage() {
           
           {/* Package cards will be added here */}
           <div className="relative z-10 flex justify-center gap-16 mt-12 px-4">
-            {/* Basic Card */}
-            <div className="w-[403px] h-[947px] bg-white rounded-[24px] border border-gray-200 pt-[60px] pr-6 pb-[60px] pl-6">
-              {/* Package Name */}
-              <h3 className="text-[33px] font-medium leading-[110%] tracking-normal text-[#EB7E29] mb-3">
-                Basic
-              </h3>
+            {pricingPlans.map((plan, index) => {
+              // Determine styling based on plan name or index
+              const isPremium = plan.name.toLowerCase() === 'premium'
+              const isBasic = plan.name.toLowerCase() === 'basic'
               
-              {/* Subtitle */}
-              <p className="text-[16px] font-normal leading-[110%] tracking-normal text-[#141414] mb-6">
-                Your foundation for a healthier life!
-              </p>
-              
-              {/* Price */}
-              <p className="text-[48px] font-medium leading-[110%] tracking-normal text-[#141414] mb-8">
-                ₦500,000.00
-              </p>
-              
-              {/* Get Started Button */}
-              <button className="w-[355px] h-[62px] rounded-full border border-[#141414] px-8 py-5 flex items-center justify-center gap-4 mb-8">
-                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#141414]">
-                  Get started
-                </span>
-              </button>
-              
-              {/* Access Text */}
-              <p className="text-[16px] font-medium leading-[110%] tracking-normal text-[#141414] mb-4">
-                You'd gain access to:
-              </p>
-              
-              {/* Features List */}
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Full Body scan
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Personalized meal plans
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Coaching and lifestyle guidance
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Detox and body cleansing strategies
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Exclusive health and wellness resources
-                  </span>
-                </li>
-              </ul>
-            </div>
+              return (
+                <div
+                  key={plan.id}
+                  className={`w-[403px] h-[947px] rounded-[24px] border pt-[60px] pr-6 pb-[60px] pl-6 ${
+                    isPremium
+                      ? 'bg-gradient-to-br from-[#0D8E18] to-[#0C4811] border-gray-200'
+                      : 'bg-white border-gray-200'
+                  }`}
+                >
+                  {/* Package Name */}
+                  <h3
+                    className={`text-[33px] font-medium leading-[110%] tracking-normal mb-3 ${
+                      isPremium ? 'text-[#FAFAFA]' : 'text-[#EB7E29]'
+                    }`}
+                  >
+                    {plan.name}
+                  </h3>
 
-            {/* Premium Card */}
-            <div className="w-[403px] h-[947px] bg-gradient-to-br from-[#0D8E18] to-[#0C4811] rounded-[24px] border border-gray-200 pt-[60px] pr-6 pb-[60px] pl-6">
-              {/* Package Name */}
-              <h3 className="text-[33px] font-medium leading-[110%] tracking-normal text-[#FAFAFA] mb-3">
-                Premium
-              </h3>
-              
-              {/* Subtitle */}
-              <p className="text-[16px] font-normal leading-[110%] tracking-normal text-[#C4D4C5] mb-6">
-                Upgrade to an elite level of health!
-              </p>
-              
-              {/* Price */}
-              <p className="text-[48px] font-medium leading-[110%] tracking-normal text-[#FAFAFA] mb-8">
-                ₦1,200,000.00
-              </p>
-              
-              {/* Get Started Button */}
-              <button className="w-[355px] h-[62px] rounded-full border border-[#FAFAFA] bg-white px-8 py-5 flex items-center justify-center gap-4 mb-8">
-                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#04640C]">
-                  Get started
-                </span>
-              </button>
-              
-              {/* Access Text */}
-              <p className="text-[16px] font-medium leading-[110%] tracking-normal text-[#FAFAFA] mb-4">
-                You'd gain access to:
-              </p>
-              
-              {/* Features List */}
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-white.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#C4D4C5]">
-                    Basic Package
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-white.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#C4D4C5]">
-                    Advanced metabolic reprogramming
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-white.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#C4D4C5]">
-                    Private coaching sessions
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-white.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#C4D4C5]">
-                    Stress and lifestyle optimization
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-white.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#C4D4C5]">
-                    Supplement recommendations
-                  </span>
-                </li>
-              </ul>
-            </div>
+                  {/* Subtitle */}
+                  <p
+                    className={`text-[16px] font-normal leading-[110%] tracking-normal mb-6 ${
+                      isPremium ? 'text-[#C4D4C5]' : 'text-[#141414]'
+                    }`}
+                  >
+                    {plan.subtitle}
+                  </p>
 
-            {/* Executive Card */}
-            <div className="w-[403px] h-[947px] bg-white rounded-[24px] border border-gray-200 pt-[60px] pr-6 pb-[60px] pl-6">
-              {/* Package Name */}
-              <h3 className="text-[33px] font-medium leading-[110%] tracking-normal text-[#EB7E29] mb-3">
-                Executive
-              </h3>
-              
-              {/* Subtitle */}
-              <p className="text-[16px] font-normal leading-[110%] tracking-normal text-[#141414] mb-6">
-                The Ultimate Health Transformation
-              </p>
-              
-              {/* Price */}
-              <p className="text-[48px] font-medium leading-[110%] tracking-normal text-[#141414] mb-8">
-                ₦6,000,000.00
-              </p>
-              
-              {/* Get Started Button */}
-              <button className="w-[355px] h-[62px] rounded-full border border-[#141414] px-8 py-5 flex items-center justify-center gap-4 mb-8">
-                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#141414]">
-                  Get started
-                </span>
-              </button>
-              
-              {/* Access Text */}
-              <p className="text-[16px] font-medium leading-[110%] tracking-normal text-[#141414] mb-4">
-                You'd gain access to:
-              </p>
-              
-              {/* Features List */}
-              <ul className="space-y-3">
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Premium Package
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    24/7 access to health experts
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Full-body detox and electrification
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Luxury wellness retreat and spa
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Holistic therapy sessions
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Personalized workouts
-                  </span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <Image
-                    src="/check-icon-orange.png"
-                    alt="Check"
-                    width={20}
-                    height={20}
-                    className="mt-1 flex-shrink-0"
-                  />
-                  <span className="text-[16px] font-normal leading-[150%] tracking-normal text-[#141414]">
-                    Lifetime access to health materials
-                  </span>
-                </li>
-              </ul>
-            </div>
+                  {/* Price */}
+                  <p
+                    className={`text-[48px] font-medium leading-[110%] tracking-normal mb-8 ${
+                      isPremium ? 'text-[#FAFAFA]' : 'text-[#141414]'
+                    }`}
+                  >
+                    ₦{plan.price.toLocaleString()}.00
+                  </p>
+
+                  {/* Get Started Button */}
+                  <button
+                    className={`w-[355px] h-[62px] rounded-full px-8 py-5 flex items-center justify-center gap-4 mb-8 ${
+                      isPremium
+                        ? 'border border-[#FAFAFA] bg-white'
+                        : 'border border-[#141414]'
+                    }`}
+                  >
+                    <span
+                      className={`text-[18px] font-medium leading-[100%] tracking-normal ${
+                        isPremium ? 'text-[#04640C]' : 'text-[#141414]'
+                      }`}
+                    >
+                      Get started
+                    </span>
+                  </button>
+
+                  {/* Access Text - HARDCODED */}
+                  <p
+                    className={`text-[16px] font-medium leading-[110%] tracking-normal mb-4 ${
+                      isPremium ? 'text-[#FAFAFA]' : 'text-[#141414]'
+                    }`}
+                  >
+                    You&apos;d gain access to:
+                  </p>
+
+                  {/* Features List - FROM API */}
+                  <ul className="space-y-3">
+                    {plan.features.map((feature, featureIndex) => (
+                      <li key={featureIndex} className="flex items-start gap-3">
+                        <Image
+                          src={
+                            isPremium
+                              ? '/check-icon-white.png'
+                              : '/check-icon-orange.png'
+                          }
+                          alt="Check"
+                          width={20}
+                          height={20}
+                          className="mt-1 flex-shrink-0"
+                        />
+                        <span
+                          className={`text-[16px] font-normal leading-[150%] tracking-normal ${
+                            isPremium ? 'text-[#C4D4C5]' : 'text-[#141414]'
+                          }`}
+                        >
+                          {feature}
+                        </span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )
+            })}
           </div>
         </div>
       )}
