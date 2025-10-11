@@ -3,7 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
-import Footer from '@/components/layout/Footer'
+
 
 // Match the backend response structure
 interface ProgramFromAPI {
@@ -217,10 +217,7 @@ export default function ProgramsPage() {
         )}
       </div>
 
-      {/* Footer */}
-      <div className="absolute top-[1700px] w-full">
-        <Footer />
-      </div>
+      
     </main>
   )
 }

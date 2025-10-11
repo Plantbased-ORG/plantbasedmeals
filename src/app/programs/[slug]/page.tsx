@@ -5,7 +5,6 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
-
 // TypeScript interface for backend API response
 interface ProgramFromAPI {
   program: {
@@ -193,11 +192,13 @@ export default function ProgramDetailPage() {
             </h2>
             
             {/* Get Program Button */}
-            <button className="absolute top-0 left-[966px] w-[173px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4">
-              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-                Get Program
-              </span>
-            </button>
+            <Link href={`/programs/${slug}/choose-package`}>
+              <button className="absolute top-0 left-[966px] w-[173px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4">
+                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                  Get Program
+                </span>
+              </button>
+            </Link>
           </div>
         )}
       </div>
@@ -287,14 +288,15 @@ export default function ProgramDetailPage() {
             </p>
 
             {/* Get This Program Now Button */}
-            <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-12">
-              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-                Get this program now
-              </span>
-            </button>
+            <Link href={`/programs/${slug}/choose-package`}>
+              <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-12">
+                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                  Get this program now
+                </span>
+              </button>
+            </Link>
           </div>
-
-          </>
+        </>
       )}
     </main>
   )
