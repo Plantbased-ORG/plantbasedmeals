@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 
+
 // TypeScript interface for backend API response
 interface ProgramFromAPI {
   program: {
@@ -116,7 +117,7 @@ export default function ProgramDetailPage() {
   }, [slug])
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-[4200px]">
       {/* Logo and Brand Name - Top Left (shifted more to the right) */}
       <div className="absolute top-6 left-34 z-10 flex items-center gap-3">
         <Image
@@ -192,13 +193,11 @@ export default function ProgramDetailPage() {
             </h2>
             
             {/* Get Program Button */}
-      <Link href={`/programs/${slug}/choose-package`}>
-        <button className="absolute top-0 left-[966px] w-[173px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4">
-          <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-            Get Program
-          </span>
-        </button>
-      </Link>
+            <button className="absolute top-0 left-[966px] w-[173px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4">
+              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                Get Program
+              </span>
+            </button>
           </div>
         )}
       </div>
@@ -288,16 +287,14 @@ export default function ProgramDetailPage() {
             </p>
 
             {/* Get This Program Now Button */}
-            <Link href={`/programs/${slug}/choose-package`}>
-              <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-12">
-                <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-                  Get this program now
-                </span>
-              </button>
-            </Link>
+            <button className="w-[250px] h-[62px] bg-[#04640C] rounded-lg px-8 py-5 flex items-center justify-center gap-4 mb-12">
+              <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
+                Get this program now
+              </span>
+            </button>
           </div>
 
-        </>
+          </>
       )}
     </main>
   )

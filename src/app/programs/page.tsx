@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import Footer from '@/components/layout/Footer'
 
 // Match the backend response structure
 interface ProgramFromAPI {
@@ -85,7 +86,7 @@ export default function ProgramsPage() {
   }, [])
 
   return (
-    <main className="min-h-screen bg-white">
+    <main className="min-h-screen bg-white pb-[1800px]">
       {/* Logo and Brand Name */}
       <div className="absolute top-6 left-34 z-10 flex items-center gap-3">
         <Image
@@ -216,6 +217,10 @@ export default function ProgramsPage() {
         )}
       </div>
 
+      {/* Footer */}
+      <div className="absolute top-[1700px] w-full">
+        <Footer />
+      </div>
     </main>
   )
 }
