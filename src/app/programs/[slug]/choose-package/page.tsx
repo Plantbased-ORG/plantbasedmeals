@@ -173,7 +173,7 @@ export default function ChoosePackagePage() {
           </p>
           
           {/* Green Plant Background - positioned below headers */}
-          <div className="absolute top-[430px] left-0 w-full h-[600px] pointer-events-none z-0">
+          <div className="absolute top-[22px] left-[-83px] w-[1692px] h-[1692px] pointer-events-none z-0">
             <Image
               src="/package-plants-bg.png"
               alt="Decorative plants background"
@@ -183,7 +183,7 @@ export default function ChoosePackagePage() {
           </div>
           
           {/* Package cards will be added here */}
-          <div className="relative z-10 flex justify-center gap-16 mt-12 px-4">
+          <div className="relative z-10 flex justify-center gap-16 mt-12 px-4 pb-32">
             {pricingPlans.map((plan, index) => {
               // Determine styling based on plan name or index
               const isPremium = plan.name.toLowerCase() === 'premium'

@@ -4,7 +4,6 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
-import Footer from '@/components/layout/Footer'
 
 // TypeScript interface for backend API response
 interface ProgramFromAPI {
@@ -298,10 +297,6 @@ export default function ProgramDetailPage() {
             </Link>
           </div>
 
-          {/* Footer - positioned right after content with proper spacing */}
-          <div className="absolute top-[4100px] w-full">
-            <Footer />
-          </div>
         </>
       )}
     </main>
