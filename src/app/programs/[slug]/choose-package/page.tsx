@@ -225,22 +225,23 @@ export default function ChoosePackagePage() {
                     ₦{plan.price.toLocaleString()}.00
                   </p>
 
-                  {/* Get Started Button */}
-                  <button
-                    className={`w-[355px] h-[62px] rounded-full px-8 py-5 flex items-center justify-center gap-4 mb-8 ${
-                      isPremium
-                        ? 'border border-[#FAFAFA] bg-white'
-                        : 'border border-[#141414]'
-                    }`}
-                  >
-                    <span
-                      className={`text-[18px] font-medium leading-[100%] tracking-normal ${
-                        isPremium ? 'text-[#04640C]' : 'text-[#141414]'
-                      }`}
-                    >
-                      Get started
-                    </span>
-                  </button>
+{/* Get Started Button */}
+<Link
+  href={`/programs/${slug}/choose-package/enter-details?package=${encodeURIComponent(plan.name)}&price=${plan.price}`}
+  className={`w-[355px] h-[62px] rounded-full px-8 py-5 flex items-center justify-center gap-4 mb-8 ${
+    isPremium
+      ? 'border border-[#FAFAFA] bg-white'
+      : 'border border-[#141414]'
+  }`}
+>
+  <span
+    className={`text-[18px] font-medium leading-[100%] tracking-normal ${
+      isPremium ? 'text-[#04640C]' : 'text-[#141414]'
+    }`}
+  >
+    Get started
+  </span>
+</Link>
 
                   {/* Access Text - HARDCODED */}
                   <p

@@ -18,7 +18,7 @@ export default function Home() {
   return (
     <main className="min-h-screen">
       {/* Hero Section - Background Image Only */}
-      <section className="relative w-full h-[981px]">
+      <section className="relative w-full h-fit xl:h-[981px]">
         <Image
           src="/hero-background.png"
           alt="Plant-based meals with fresh vegetables and fruits"
@@ -92,7 +92,7 @@ export default function Home() {
           </span>
         </div>
         {/* Buttons */}
-        <div className="absolute top-[680px] left-6 z-10 flex gap-4">
+        <div className="absolute top-[680px] left-6 z-10 flex  gap-4">
           {/* First Button */}
           <button className="flex items-center gap-4 w-[274px] h-[64px] bg-[#04640C] rounded-lg px-8 py-5">
             <Image
