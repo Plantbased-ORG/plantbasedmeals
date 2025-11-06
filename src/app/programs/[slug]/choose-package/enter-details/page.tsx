@@ -14,8 +14,16 @@ export default function EnterDetailsPage() {
   
   const [programName, setProgramName] = useState<string>('')
   const [loading, setLoading] = useState(true)
+  const [submitting, setSubmitting] = useState(false)
 
   const [phoneNumber, setPhoneNumber] = useState<E164Number | undefined>()
+  
+  // Form data state
+  const [formData, setFormData] = useState({
+    fullName: '',
+    email: '',
+    nationality: '',
+  })
 
 
   // Fetch program to get the name for breadcrumb
@@ -58,6 +66,90 @@ export default function EnterDetailsPage() {
       fetchProgram()
     }
   }, [slug])
+
+  // Handle input changes
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }))
+  }
+
+  // Handle form submission
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setSubmitting(true)
+
+    try {
+      // Send email to CEO with form details
+      const apiUrl = process.env.NEXT_PUBLIC_API_URL || 'https://plantbased-backend.onrender.com'
+      
+      await fetch(`${apiUrl}/api/v1/send-customer-details`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          fullName: formData.fullName,
+          email: formData.email,
+          nationality: formData.nationality,
+          phoneNumber: phoneNumber,
+          program: programName,
+          package: 'Premium', // TODO: Get from URL params
+        }),
+      })
+
+      // Initialize Paystack payment with pre-filled email
+      // @ts-ignore - PaystackPop will be loaded from script
+      const handler = window.PaystackPop.setup({
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Add your Paystack public key
+        email: formData.email, // Pre-fill with user's email
+        amount: 15000000, // TODO: Get price from URL params (amount in kobo)
+        currency: 'NGN',
+        ref: `${Date.now()}_${formData.email}`, // Unique transaction reference
+        metadata: {
+          custom_fields: [
+            {
+              display_name: 'Full Name',
+              variable_name: 'full_name',
+              value: formData.fullName,
+            },
+            {
+              display_name: 'Phone Number',
+              variable_name: 'phone_number',
+              value: phoneNumber || '',
+            },
+            {
+              display_name: 'Nationality',
+              variable_name: 'nationality',
+              value: formData.nationality,
+            },
+            {
+              display_name: 'Program',
+              variable_name: 'program',
+              value: programName,
+            },
+          ],
+        },
+        onClose: function() {
+          alert('Payment window closed')
+        },
+        callback: function(response: any) {
+          // Payment successful
+          alert('Payment successful! Reference: ' + response.reference)
+          // TODO: Verify payment on backend and redirect user
+        },
+      })
+
+      handler.openIframe()
+    } catch (error) {
+      console.error('Error:', error)
+      alert('An error occurred. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
+  }
 
   return (
     <main className="min-h-screen bg-white">
@@ -154,7 +246,7 @@ export default function EnterDetailsPage() {
 
       {/* Form Section */}
       <div className="w-full mt-12 flex justify-center px-4">
-        <div className="w-[620px]">
+        <form onSubmit={handleSubmit} className="w-[620px]">
           {/* Full name */}
           <div className="mb-6">
             <label 
@@ -167,7 +259,10 @@ export default function EnterDetailsPage() {
               type="text"
               id="fullName"
               name="fullName"
+              value={formData.fullName}
+              onChange={handleInputChange}
               placeholder="Joseph Okoye"
+              required
               className="w-[620px] h-[62px] px-4 py-5 rounded-[8px] border border-[#D7DCE999] bg-[#F5F5F5] text-[16px] text-[#141414] placeholder:text-[#A0A0A0] focus:outline-none focus:border-[#29A248]"
             />
           </div>
@@ -184,7 +279,10 @@ export default function EnterDetailsPage() {
               type="email"
               id="email"
               name="email"
+              value={formData.email}
+              onChange={handleInputChange}
               placeholder="discusswithjoseph@gmail.com"
+              required
               className="w-[620px] h-[62px] px-4 py-5 rounded-[8px] border border-[#D7DCE999] bg-[#F5F5F5] text-[16px] text-[#141414] placeholder:text-[#A0A0A0] focus:outline-none focus:border-[#29A248]"
             />
           </div>
@@ -201,7 +299,10 @@ export default function EnterDetailsPage() {
               type="text"
               id="nationality"
               name="nationality"
+              value={formData.nationality}
+              onChange={handleInputChange}
               placeholder="Nigeria"
+              required
               className="w-[620px] h-[62px] px-4 py-5 rounded-[8px] border border-[#D7DCE999] bg-[#F5F5F5] text-[16px] text-[#141414] placeholder:text-[#A0A0A0] focus:outline-none focus:border-[#29A248]"
             />
           </div>
@@ -226,13 +327,14 @@ export default function EnterDetailsPage() {
           {/* Proceed to payment button */}
           <button
             type="submit"
-            className="w-auto h-[62px] px-8 py-5 rounded-full bg-[#0D8E18] hover:bg-[#0C7614] transition-colors flex items-center justify-center"
+            disabled={submitting}
+            className="w-[238px] h-[62px] px-8 py-5 rounded-[8px] bg-[#04640C] hover:bg-[#03550A] transition-colors flex items-center justify-center gap-4 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            <span className="text-[18px] font-medium leading-[100%] tracking-[0%] text-white">
-              Proceed to payment
+            <span className="text-[18px] font-medium leading-[100%] tracking-[0%] text-[#FAFAFA]">
+              {submitting ? 'Processing...' : 'Proceed to payment'}
             </span>
           </button>
-        </div>
+        </form>
       </div>
     </main>
   )
