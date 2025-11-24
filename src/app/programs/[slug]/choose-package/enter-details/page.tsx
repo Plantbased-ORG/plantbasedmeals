@@ -8,6 +8,43 @@ import PhoneInput from 'react-phone-number-input'
 import 'react-phone-number-input/style.css'
 import type { E164Number } from 'libphonenumber-js/core'
 
+interface Program {
+  program: {
+    name: string
+  }
+}
+
+interface PaystackResponse {
+  reference: string
+}
+
+interface PaystackHandler {
+  openIframe: () => void
+}
+
+declare global {
+  interface Window {
+    PaystackPop: {
+      setup: (config: {
+        key: string | undefined
+        email: string
+        amount: number
+        currency: string
+        ref: string
+        metadata: {
+          custom_fields: Array<{
+            display_name: string
+            variable_name: string
+            value: string
+          }>
+        }
+        onClose: () => void
+        callback: (response: PaystackResponse) => void
+      }) => PaystackHandler
+    }
+  }
+}
+
 export default function EnterDetailsPage() {
   const params = useParams()
   const slug = params.slug as string
@@ -44,9 +81,9 @@ export default function EnterDetailsPage() {
           throw new Error(`Failed to fetch programs: ${response.status}`)
         }
         
-        const data = await response.json()
+        const data: Program[] = await response.json()
         
-        const matchedProgram = data.find((item: any) => {
+        const matchedProgram = data.find((item: Program) => {
           const programSlug = item.program.name.toLowerCase().replace(/\s+/g, '-')
           return programSlug === slug
         })
@@ -101,13 +138,12 @@ export default function EnterDetailsPage() {
       })
 
       // Initialize Paystack payment with pre-filled email
-      // @ts-ignore - PaystackPop will be loaded from script
       const handler = window.PaystackPop.setup({
-        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY, // Add your Paystack public key
-        email: formData.email, // Pre-fill with user's email
+        key: process.env.NEXT_PUBLIC_PAYSTACK_PUBLIC_KEY,
+        email: formData.email,
         amount: 15000000, // TODO: Get price from URL params (amount in kobo)
         currency: 'NGN',
-        ref: `${Date.now()}_${formData.email}`, // Unique transaction reference
+        ref: `${Date.now()}_${formData.email}`,
         metadata: {
           custom_fields: [
             {
@@ -135,7 +171,7 @@ export default function EnterDetailsPage() {
         onClose: function() {
           alert('Payment window closed')
         },
-        callback: function(response: any) {
+        callback: function(response: PaystackResponse) {
           // Payment successful
           alert('Payment successful! Reference: ' + response.reference)
           // TODO: Verify payment on backend and redirect user
