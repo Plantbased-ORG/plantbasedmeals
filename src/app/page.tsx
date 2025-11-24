@@ -1,6 +1,6 @@
 import Image from 'next/image'
 import NutritionSection from '@/components/sections/NutritionSection'
-import ExploreButton from '@/components/ui/ExploreButton'
+// import ExploreButton from '@/components/ui/ExploreButton'
 import BenefitsSection from '@/components/sections/BenefitsSection'
 import ExpertiseSection from '@/components/sections/ExpertiseSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'

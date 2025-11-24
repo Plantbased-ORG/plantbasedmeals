@@ -9,11 +9,11 @@ export default function NutritionSection() {
           {/* Left Content */}
           <div>
             <div className="transform translate-y-20">
-              <h2 className="text-[57px] font-medium leading-[100%] tracking-[-1%] text-[#141414] whitespace-nowrap">
+              <h2 className="text-[24px] xl:text-[57px] font-medium leading-[100%] tracking-[-2%] xl:tracking-[-1%] text-[#141414]">
                 Heal with Plant-based Nutrition
               </h2>
-              <p className="text-[57px] font-medium leading-[100%] tracking-[-1%] text-[#141414]">
-                Reverse <span className="text-[69px] font-bold italic tracking-normal text-[#8B5E3C]">Obesity</span>
+              <p className="text-[24px] xl:text-[57px] font-medium leading-[100%] tracking-[-1%] text-[#141414] whitespace-nowrap">
+                Reverse <span className="text-[32px] xl:text-[69px] font-bold italic tracking-[0%] xl:tracking-normal text-[#8B5E3C]">Obesity</span>
               </p>
               
               {/* Description Text */}
