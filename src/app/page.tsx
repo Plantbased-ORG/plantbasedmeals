@@ -82,7 +82,7 @@ export default function Home() {
           </p>
         </div>
         {/* Trust Badge */}
-        <div className="absolute top-[448px] xl:top-[630px] left-4 xl:left-6 z-10 flex items-center gap-2 xl:gap-3">
+        <div className="absolute top-[470px] xl:top-[650px] left-4 xl:left-6 z-10 flex items-center gap-2 xl:gap-3">
           <Image
             src="/heroicon.png"
             alt="Trust badge icon"
@@ -95,7 +95,7 @@ export default function Home() {
           </span>
         </div>
         {/* Buttons */}
-        <div className="absolute top-[480px] left-4 xl:top-[680px] xl:left-6 z-10 flex flex-row gap-2 xl:gap-4">
+        <div className="absolute top-[510px] left-4 xl:top-[690px] xl:left-6 z-10 flex flex-row gap-2 xl:gap-4">
           {/* First Button */}
           <button className="flex items-center justify-center gap-2 xl:gap-4 w-[170px] xl:w-[274px] h-[40px] xl:h-[64px] bg-[#04640C] rounded-lg px-4 xl:px-8 py-3 xl:py-5">
             <Image

@@ -13,8 +13,6 @@ export default function NutritionSection() {
     'Lupus',
     'Infertility',
     'Sickle Cell',
-    'Type 2 Diabetes',
-    'High Cholesterol',
     'Heart Disease',
   ]
 
