@@ -6,6 +6,7 @@ import ExpertiseSection from '@/components/sections/ExpertiseSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import CtaSection from '@/components/sections/CtaSection'
 import ExploreButton from '@/components/ui/ExploreButton'
+import BookConsultationButton from '@/components/ui/BookConsultationButton'
 
 export default function Home() {
   // Tags data
@@ -97,18 +98,7 @@ export default function Home() {
         {/* Buttons */}
         <div className="absolute top-[510px] left-4 xl:top-[690px] xl:left-6 z-10 flex flex-row gap-2 xl:gap-4">
           {/* First Button */}
-          <button className="flex items-center justify-center gap-2 xl:gap-4 w-[170px] xl:w-[274px] h-[40px] xl:h-[64px] bg-[#04640C] rounded-lg px-4 xl:px-8 py-3 xl:py-5">
-            <Image
-              src="/button1icon.png"
-              alt="Book consultation icon"
-              width={16}
-              height={16}
-              className="object-contain flex-shrink-0 xl:w-6 xl:h-6"
-            />
-            <span className="text-[12px] xl:text-[18px] font-medium leading-[100%] tracking-[0%] text-[#FAFAFA] whitespace-nowrap">
-              Book a consultation
-            </span>
-          </button>
+          <BookConsultationButton />
 
           {/* Second Button */}
           <button className="flex items-center justify-center gap-2 xl:gap-4 w-[157px] xl:w-[274px] h-[40px] xl:h-[64px] bg-[#2C3E50] rounded-lg px-4 xl:px-8 py-3 xl:py-5">

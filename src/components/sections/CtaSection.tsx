@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import ExploreButton from '../ui/ExploreButton'
+import BookConsultationButton from '../ui/BookConsultationButton'
 
 export default function CtaSection() {
   return (
@@ -19,18 +20,7 @@ export default function CtaSection() {
         {/* Buttons */}
         <div className="flex gap-4 mt-8">
           {/* First Button */}
-          <button className="flex items-center gap-4 w-[274px] h-[64px] bg-[#04640C] rounded-lg px-8 py-5">
-            <Image
-              src="/button1icon.png"
-              alt="Book consultation icon"
-              width={24}
-              height={24}
-              className="object-contain flex-shrink-0"
-            />
-            <span className="text-[18px] font-medium leading-[100%] tracking-normal text-[#FAFAFA]">
-              Book a consultation
-            </span>
-          </button>
+          <BookConsultationButton />
 
           {/* Second Button */}
           <ExploreButton />
