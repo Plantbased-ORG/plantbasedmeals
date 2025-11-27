@@ -5,6 +5,7 @@ import BenefitsSection from '@/components/sections/BenefitsSection'
 import ExpertiseSection from '@/components/sections/ExpertiseSection'
 import TestimonialsSection from '@/components/sections/TestimonialsSection'
 import CtaSection from '@/components/sections/CtaSection'
+import ExploreButton from '@/components/ui/ExploreButton'
 
 export default function Home() {
   // Tags data
@@ -111,15 +112,9 @@ export default function Home() {
 
           {/* Second Button */}
           <button className="flex items-center justify-center gap-2 xl:gap-4 w-[157px] xl:w-[274px] h-[40px] xl:h-[64px] bg-[#2C3E50] rounded-lg px-4 xl:px-8 py-3 xl:py-5">
-            <Image
-              src="/button2icon.png"
-              alt="Explore programs icon"
-              width={16}
-              height={16}
-              className="object-contain flex-shrink-0 xl:w-6 xl:h-6"
-            />
+            
             <span className="text-[12px] xl:text-[18px] font-medium leading-[100%] tracking-[0%] text-[#FAFAFA] whitespace-nowrap">
-              Explore our programs
+              <ExploreButton/>
             </span>
           </button>
         </div>
