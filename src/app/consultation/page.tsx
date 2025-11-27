@@ -97,7 +97,7 @@ export default function BookAppointmentPage() {
           
           <div className="space-y-3">
             <p>
-              ✅ <span className="font-semibold">Assess Your Health & Goals</span> – Discuss your current lifestyle, diet, and any health concerns you're facing.
+              ✅ <span className="font-semibold">Assess Your Health & Goals</span> – Discuss your current lifestyle, diet, and any health concerns you&apos;re facing.
             </p>
             
             <p>
@@ -117,7 +117,7 @@ export default function BookAppointmentPage() {
             </p>
             
             <p className="mt-4">
-              💡 This is your time to ask questions, gain clarity, and take control of your health—naturally. We're here to guide you every step of the way!
+              💡 This is your time to ask questions, gain clarity, and take control of your health—naturally. We&apos;re here to guide you every step of the way!
             </p>
           </div>
         </div>
