@@ -1,7 +1,33 @@
+'use client'
+
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
 import ExploreButton from '../ui/ExploreButton'
 
 export default function NutritionSection() {
+  const diseases = [
+    'Obesity',
+    'Cancer',
+    'HIV/AIDS',
+    'Weight gain',
+    'Lupus',
+    'Infertility',
+    'Sickle Cell',
+    'Type 2 Diabetes',
+    'High Cholesterol',
+    'Heart Disease',
+  ]
+
+  const [currentDiseaseIndex, setCurrentDiseaseIndex] = useState(0)
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentDiseaseIndex((prevIndex) => (prevIndex + 1) % diseases.length)
+    }, 3000) // Change every 3 seconds
+
+    return () => clearInterval(interval)
+  }, [diseases.length])
+
   return (
     <section className="relative w-full h-[929px] xl:h-[736px] bg-gradient-to-b from-[#D7DCE9] to-[#FAFAFA]">
       <div className="max-w-[1512px] mx-auto px-4 xl:px-6 py-8 xl:py-16">
@@ -9,12 +35,14 @@ export default function NutritionSection() {
           {/* Left Content */}
           <div>
             <div className="transform translate-y-0 xl:translate-y-20">
-              <h2 className="text-[24px] xl:text-[57px] font-medium leading-[100%] tracking-[-2%] xl:tracking-[-1%] text-[#141414]">
-                Heal with Plant-based Nutrition
-              </h2>
-              <p className="text-[24px] xl:text-[57px] font-medium leading-[100%] tracking-[-1%] text-[#141414] whitespace-nowrap">
-                Reverse <span className="text-[32px] xl:text-[69px] font-bold italic tracking-[0%] xl:tracking-normal text-[#8B5E3C]">Obesity</span>
-              </p>
+              <div className="text-[24px] xl:text-[57px] font-medium leading-[100%] tracking-[-2%] xl:tracking-[-1%] text-[#141414]">
+                <div className="whitespace-nowrap">Heal with Plant-based Nutrition</div>
+                <div>
+                  Reverse <span className="text-[32px] xl:text-[69px] font-bold italic tracking-[0%] xl:tracking-normal text-[#8B5E3C] inline-block min-w-[200px] xl:min-w-[400px] transition-opacity duration-500">
+                    {diseases[currentDiseaseIndex]}
+                  </span>
+                </div>
+              </div>
               
               {/* Description Text */}
               <div className="mt-6 max-w-[343px] xl:max-w-[737px]">
