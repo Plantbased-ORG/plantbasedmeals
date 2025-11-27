@@ -6,7 +6,7 @@ import Link from 'next/link'
 export default function ExploreButton() {
   return (
     <Link href="/programs">
-      <button className="flex items-center gap-4 w-[289px] h-[64px] bg-gray-800 rounded-lg px-8 py-5">
+      <button className="flex items-center gap-4 w-[289px] h-[64px] bg-gray-800 rounded-lg px-8 py-5 cursor-pointer hover:bg-gray-700 transition-colors">
         <Image
           src="/button2icon.png"
           alt="Explore programs icon"
